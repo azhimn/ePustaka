@@ -25,7 +25,7 @@ public class Validation {
         boolean result = validateRegex(pattern, email);
         
         if(!result) {
-            JOptionPane.showMessageDialog(null, "Format email salah.");
+            JOptionPane.showMessageDialog(null, "Format email salah.", "Pemberitahuan", 2);
         }
         return result;
     }
@@ -35,14 +35,14 @@ public class Validation {
         boolean result = validateRegex(pattern, password);
         
         if(!result) {
-            JOptionPane.showMessageDialog(null, "Password minimal terdiri dari 8 angka dan tidak boleh ada spasi.");
+            JOptionPane.showMessageDialog(null, "Password minimal terdiri dari 8 angka dan tidak boleh ada spasi.", "Pemberitahuan", 2);
         }
         return result;
     }
     
     public static boolean validatePhone(String phone) {
         if ("0".equals(phone.charAt(0))) {
-            JOptionPane.showMessageDialog(null, "Nomor telepon diawali dengan kode negara.");
+            JOptionPane.showMessageDialog(null, "Nomor telepon diawali dengan kode negara.", "Pemberitahuan", 2);
             return false;
         }
         
@@ -50,7 +50,7 @@ public class Validation {
         boolean result = validateRegex(pattern, phone);
         
         if(!result) {
-            JOptionPane.showMessageDialog(null, "ISBN harus terdiri dari 10 s.d. 13 angka.");
+            JOptionPane.showMessageDialog(null, "ISBN harus terdiri dari 10 s.d. 13 angka.", "Pemberitahuan", 2);
         }
         return result;
     }
@@ -60,7 +60,7 @@ public class Validation {
         boolean result = validateRegex(pattern, isbn);
         
         if(!result) {
-            JOptionPane.showMessageDialog(null, "ISBN harus terdiri dari 10 s.d. 13 angka.");
+            JOptionPane.showMessageDialog(null, "ISBN harus terdiri dari 10 s.d. 13 angka.", "Pemberitahuan", 2);
         }
         return result;
     }
@@ -69,12 +69,12 @@ public class Validation {
         int result = lesser.compareTo(greater);
 
         if (result > 0) {
-            JOptionPane.showMessageDialog(null, "Tanggal tenggat tidak boleh berada sebelum tanggal peminjaman.");
+            JOptionPane.showMessageDialog(null, "Tanggal tenggat tidak boleh berada sebelum tanggal peminjaman.", "Pemberitahuan", 2);
             return false;
         } else if (result < 0) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "Kedua tanggal tidak boleh sama.");
+            JOptionPane.showMessageDialog(null, "Kedua tanggal tidak boleh sama.", "Pemberitahuan", 2);
             return false;
         }
     }

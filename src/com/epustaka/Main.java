@@ -114,7 +114,8 @@ public class Main extends javax.swing.JFrame {
                 bukuFrame.show();
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Username atau Password salah");
+//                JOptionPane.showMessageDialog(null, "Username atau Password salah");
+                JOptionPane.showMessageDialog(null, "Username atau Password salah.", "Pemberitahuan", 0);
 //                Main.admin = true;
 //                
 //                Buku bukuFrame = new Buku();

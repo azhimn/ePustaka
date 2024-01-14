@@ -491,11 +491,11 @@ public class Anggota extends javax.swing.JFrame {
             java.sql.Connection conn = (Connection)Config.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil.", "Pemberitahuan", 1);
             load_table();
             bersihkan();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Penyimpanan Data Gagal: " + e.getMessage(), "Pemberitahuan", 0);
         }
     }//GEN-LAST:event_btTambahActionPerformed
 
@@ -520,9 +520,9 @@ public class Anggota extends javax.swing.JFrame {
             java.sql.Connection conn = (Connection)Config.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Diperbaru");
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diperbarui.", "Pemberitahuan", 1);
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal: " + e.getMessage(), "Pemberitahuan", 0);
         }
 
         load_table();
@@ -540,9 +540,9 @@ public class Anggota extends javax.swing.JFrame {
             java.sql.Connection conn = (Connection)Config.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus.", "Pemberitahuan", 1);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Terjadi Kesalahan", 0);
         }
         load_table();
         bersihkan();
