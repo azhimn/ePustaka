@@ -54,7 +54,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         jLabel3.setText("Email");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 220, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 240, -1));
 
         txtEmail.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +67,7 @@ public class Main extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Password");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 240, -1));
 
         txtPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 240, -1));

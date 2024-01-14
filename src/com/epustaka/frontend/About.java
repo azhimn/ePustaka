@@ -4,6 +4,8 @@
  */
 package com.epustaka.frontend;
 
+import com.epustaka.Main;
+
 /**
  *
  * @author mazhn
@@ -15,6 +17,11 @@ public class About extends javax.swing.JFrame {
      */
     public About() {
         initComponents();
+        if (!Main.admin) {
+            btMenuPustakawan.setVisible(false);
+        }
+        
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,8 +40,18 @@ public class About extends javax.swing.JFrame {
         btMenuAnggota = new javax.swing.JButton();
         btMenuPustakawan = new javax.swing.JButton();
         btMenuTentang = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ePustaka | Tentang Kami");
+        setMaximumSize(new java.awt.Dimension(1293, 756));
+        setMinimumSize(new java.awt.Dimension(1293, 756));
+        setPreferredSize(new java.awt.Dimension(1293, 756));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
@@ -149,6 +166,62 @@ public class About extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(194, 194, 194), 1, true));
+
+        jLabel8.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel8.setText("<html> <h1>Tim Pengembang - Kelompok 6</h1>  <strong>Aisyah</strong> - C030322070 <br> Documentation & QA Tester <br><br>  <strong>Eugene Ray Rahman</strong> - C030322075 <<br> Documentation & QA Tester <br><br>  <strong>Muhammad Azhim Nugroho</strong> - C030322086 <br> Programmer <br><br>  <strong>Rizky Aditya</strong> - C030322 <br> Database Designer <br><br> </html>");
+        jLabel8.setToolTipText("");
+
+        jLabel3.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel3.setText("<html> <body style=\"word-wrap: break-word;\">\n<p>Dalam rangka memenuhi Ujian Akhir Semester mata kuliah \"Pemrograman Berbasis Objek\", kami membuat sebuah aplikasi sederhana berbasis desktop.</p><br>\n<p>Aplikasi \"ePustaka\" merupakan aplikasi yang digunakan oleh pustakawan nuntuk mendata buku dan peminjaman buku dalam sebuah perpustakaan.</p> <br> <p>Dalam aplikasi ini, seorang pustakawan dapat mengelola (membaca, menambah, meng-edit, & menghapus) data-data mengenai buku, peminjaman buku, anggota perpustakaan, dan anggota pustakawan perpustakaan. </p>  </body> </html>");
+
+        jLabel4.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        jLabel4.setText("Tentang ePustaka");
+        jLabel4.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 710, 660));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(194, 194, 194), 1, true));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 708, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 428, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 710, 430));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,6 +234,9 @@ public class About extends javax.swing.JFrame {
 
     private void btMenuPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenuPeminjamanActionPerformed
         // TODO add your handling code here:
+        Peminjaman peminjamanFrame = new Peminjaman();
+        peminjamanFrame.show();
+        dispose();
     }//GEN-LAST:event_btMenuPeminjamanActionPerformed
 
     private void btMenuAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenuAnggotaActionPerformed
@@ -223,6 +299,11 @@ public class About extends javax.swing.JFrame {
     private javax.swing.JButton btMenuPustakawan;
     private javax.swing.JButton btMenuTentang;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

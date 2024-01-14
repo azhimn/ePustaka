@@ -92,6 +92,7 @@ public class Buku extends javax.swing.JFrame {
         btMenuPeminjaman = new javax.swing.JButton();
         btMenuAnggota = new javax.swing.JButton();
         btMenuPustakawan = new javax.swing.JButton();
+        btMenuTentang = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbBuku = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -187,6 +188,20 @@ public class Buku extends javax.swing.JFrame {
             }
         });
 
+        btMenuTentang.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        btMenuTentang.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        btMenuTentang.setForeground(new java.awt.Color(255, 255, 255));
+        btMenuTentang.setText("Tentang");
+        btMenuTentang.setToolTipText("Menu Tentang");
+        btMenuTentang.setBorder(null);
+        btMenuTentang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btMenuTentang.setPreferredSize(new java.awt.Dimension(72, 64));
+        btMenuTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMenuTentangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -200,7 +215,9 @@ public class Buku extends javax.swing.JFrame {
                 .addComponent(btMenuAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btMenuPustakawan, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 608, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btMenuTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -213,7 +230,8 @@ public class Buku extends javax.swing.JFrame {
                     .addComponent(btMenuPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btMenuAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btMenuPustakawan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(btMenuTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -643,6 +661,13 @@ public class Buku extends javax.swing.JFrame {
         rowSorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_txtSearchKeyTyped
 
+    private void btMenuTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenuTentangActionPerformed
+        // TODO add your handling code here:
+        About aboutFrame = new About();
+        aboutFrame.show();
+        dispose();
+    }//GEN-LAST:event_btMenuTentangActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -667,6 +692,7 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JButton btMenuBuku;
     private javax.swing.JButton btMenuPeminjaman;
     private javax.swing.JButton btMenuPustakawan;
+    private javax.swing.JButton btMenuTentang;
     private javax.swing.JButton btTambah;
     private javax.swing.JComboBox<String> cbKategori;
     private com.toedter.calendar.JYearChooser dtTahun;
