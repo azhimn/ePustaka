@@ -10,7 +10,10 @@ import com.epustaka.backend.Validation;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -113,6 +116,9 @@ public class Buku extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         lbId = new javax.swing.JLabel();
         dtTahun = new com.toedter.calendar.JYearChooser();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ePustaka | Menu Buku");
@@ -231,7 +237,7 @@ public class Buku extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbBuku);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 640));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 720, 570));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(194, 194, 194), 1, true));
@@ -421,6 +427,47 @@ public class Buku extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 530, 640));
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(194, 194, 194), 1, true));
+
+        jLabel10.setText("Cari Buku");
+
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSearchKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearch)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 636, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 720, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -447,6 +494,11 @@ public class Buku extends javax.swing.JFrame {
 
     private void btHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHapusActionPerformed
         // TODO add your handling code here:
+        int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah anda yakin menghapus buku '" + txtJudul.getText() + "'?", "Pemberitahuan",  JOptionPane.YES_NO_OPTION);
+        if(konfirmasi == 1 || konfirmasi == JOptionPane.CLOSED_OPTION) {
+            return;
+        }
+        
         try {
             String sql = "Delete FROM buku WHERE id ='" + lbId.getText() + "'";
             java.sql.Connection conn = (Connection)Config.configDB();
@@ -463,6 +515,11 @@ public class Buku extends javax.swing.JFrame {
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
         // TODO add your handling code here:
         if (!Validation.validateISBN(txtIsbn.getText())) {
+            return;
+        }
+        
+        int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah anda yakin mengubah data buku '" + txtJudul.getText() + "'?", "Pemberitahuan",  JOptionPane.YES_NO_OPTION);
+        if(konfirmasi == 1 || konfirmasi == JOptionPane.CLOSED_OPTION) {
             return;
         }
         
@@ -570,6 +627,21 @@ public class Buku extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tbBukuMouseClicked
 
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
+        // TODO add your handling code here:
+        String searchText = txtSearch.getText().trim();
+
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tbBuku.getModel());
+        tbBuku.setRowSorter(rowSorter);
+
+        RowFilter<TableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + searchText);
+        rowSorter.setRowFilter(rowFilter);
+    }//GEN-LAST:event_txtSearchKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -598,6 +670,7 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbKategori;
     private com.toedter.calendar.JYearChooser dtTahun;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -609,6 +682,7 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbId;
     private javax.swing.JTable tbBuku;
@@ -617,5 +691,6 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JTextField txtLokasi;
     private javax.swing.JTextField txtPenerbit;
     private javax.swing.JTextField txtPenulis;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

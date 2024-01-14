@@ -114,12 +114,12 @@ public class Main extends javax.swing.JFrame {
                 bukuFrame.show();
                 dispose();
             } else {
-//                JOptionPane.showMessageDialog(null, "Username atau Password salah");
-                Main.admin = true;
-                
-                Buku bukuFrame = new Buku();
-                bukuFrame.show();
-                dispose();
+                JOptionPane.showMessageDialog(null, "Username atau Password salah");
+//                Main.admin = true;
+//                
+//                Buku bukuFrame = new Buku();
+//                bukuFrame.show();
+//                dispose();
             }
         } catch (Exception e) {}
     }//GEN-LAST:event_tbtbLoginActionPerformed
