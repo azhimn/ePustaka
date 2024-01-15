@@ -78,4 +78,17 @@ public class Validation {
             return false;
         }
     }
+    
+    public static boolean validateLocation(String location) {
+        String patternA = "^[A-Z]-\\d$";
+        String patternB = "^[A-Z]{2}-\\d{2}$";
+        
+        boolean resultA = validateRegex(patternA, location);
+        boolean resultB = validateRegex(patternB, location);
+        if(!resultA || !resultB) {
+            JOptionPane.showMessageDialog(null, "Format lokasi harus mengikuti salah satu contoh di bawah: \n A-1 atau AA-01", "Pemberitahuan", 2);
+            return false;
+        }
+        return true;
+    }
 }

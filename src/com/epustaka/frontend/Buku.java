@@ -533,7 +533,7 @@ public class Buku extends javax.swing.JFrame {
 
     private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
         // TODO add your handling code here:
-        if (!Validation.validateISBN(txtIsbn.getText())) {
+        if (!Validation.validateISBN(txtIsbn.getText()) || !Validation.validateLocation(txtLokasi.getText())) {
             return;
         }
         
@@ -565,7 +565,7 @@ public class Buku extends javax.swing.JFrame {
 
     private void btTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTambahActionPerformed
         // TODO add your handling code here:
-        if (!Validation.validateISBN(txtIsbn.getText())) {
+        if (!Validation.validateISBN(txtIsbn.getText()) || !Validation.validateLocation(txtLokasi.getText())) {
             return;
         }
         
