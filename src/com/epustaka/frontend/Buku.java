@@ -73,6 +73,7 @@ public class Buku extends javax.swing.JFrame {
         if (!Main.admin) {
             btMenuPustakawan.setVisible(false);
         }
+        tbBuku.setDefaultEditor(Object.class, null);
         
         setLocationRelativeTo(null);
     }
@@ -114,7 +115,6 @@ public class Buku extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtLokasi = new javax.swing.JTextField();
         cbKategori = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
         lbId = new javax.swing.JLabel();
         dtTahun = new com.toedter.calendar.JYearChooser();
         jPanel4 = new javax.swing.JPanel();
@@ -368,8 +368,7 @@ public class Buku extends javax.swing.JFrame {
 
         cbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiksi", "Non-fiksi" }));
 
-        jLabel9.setText("ID =");
-
+        lbId.setForeground(new java.awt.Color(255, 255, 255));
         lbId.setText(" ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -395,8 +394,7 @@ public class Buku extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(29, 29, 29)
                                 .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dtTahun, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -435,9 +433,7 @@ public class Buku extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLokasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lbId))
+                .addComponent(lbId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -565,7 +561,7 @@ public class Buku extends javax.swing.JFrame {
 
     private void btTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTambahActionPerformed
         // TODO add your handling code here:
-        if (!Validation.validateISBN(txtIsbn.getText()) || !Validation.validateLocation(txtLokasi.getText())) {
+        if (!Validation.validateISBN(txtIsbn.getText()) || !Validation.validateISBNExists(txtIsbn.getText()) || !Validation.validateLocation(txtLokasi.getText())) {
             return;
         }
         
@@ -705,7 +701,6 @@ public class Buku extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

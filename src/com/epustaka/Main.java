@@ -4,11 +4,11 @@
  */
 package com.epustaka;
 
-import com.epustaka.backend.Config;
-import com.epustaka.frontend.Buku;
+import com.epustaka.frontend.Login;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.sql.Connection;
-import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  *
@@ -21,6 +21,30 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        runProgressBar();
+    }
+    
+    private void runProgressBar() {
+        Timer timer = new Timer(15, new ActionListener() {
+            int progress = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pbLoading.setValue(progress);
+                lbLoading.setText("Tunggu sebentar... " + progress + "%");
+                progress++;
+
+                if (progress > 100) {
+                    ((Timer) e.getSource()).stop();
+                    lbLoading.setText("Loading selesai!");
+                    Login loginFrame = new Login();
+                    loginFrame.show();
+                    dispose();
+                }
+            }
+        });
+
+        timer.start();
     }
 
     /**
@@ -32,12 +56,10 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JPasswordField();
-        tbLogin = new javax.swing.JButton();
+        pbLoading = new javax.swing.JProgressBar();
+        lbLoading = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ePustaka | Login");
@@ -47,83 +69,53 @@ public class Main extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+
         jLabel2.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel2.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("ePustaka");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jLabel3.setText("Email");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 240, -1));
+        pbLoading.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
 
-        txtEmail.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 240, -1));
+        lbLoading.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        lbLoading.setForeground(new java.awt.Color(255, 255, 255));
+        lbLoading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbLoading.setText("Mohon tunggu...");
 
-        jLabel4.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Password");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 240, -1));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(91, 91, 91)
+                                .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(155, 155, 155)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 83, Short.MAX_VALUE))
+                    .addComponent(lbLoading, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(159, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lbLoading)
+                .addGap(163, 163, 163))
+        );
 
-        txtPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 240, -1));
-
-        tbLogin.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        tbLogin.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        tbLogin.setForeground(new java.awt.Color(255, 255, 255));
-        tbLogin.setText("Login");
-        tbLogin.setToolTipText("Menu Peminjaman");
-        tbLogin.setBorder(null);
-        tbLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tbLogin.setMaximumSize(new java.awt.Dimension(32, 18));
-        tbLogin.setMinimumSize(new java.awt.Dimension(32, 18));
-        tbLogin.setPreferredSize(new java.awt.Dimension(72, 64));
-        tbLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbtbLoginActionPerformed(evt);
-            }
-        });
-        getContentPane().add(tbLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 280, 40));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void tbtbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtbLoginActionPerformed
-        // TODO add your handling code here:
-        String email = txtEmail.getText();
-        String password = txtPassword.getText();
-        
-        try {
-            String sql = "SELECT * FROM pustakawan WHERE email = '" + email + "' AND password = '" + password + "'";
-            java.sql.Connection conn = (Connection)Config.configDB();
-            java.sql.Statement stm = conn.createStatement();
-            java.sql.ResultSet res = stm.executeQuery(sql);
-            
-            if(res.next()) {
-                Main.admin = res.getBoolean("admin");
-                
-                Buku bukuFrame = new Buku();
-                bukuFrame.show();
-                dispose();
-            } else {
-//                JOptionPane.showMessageDialog(null, "Username atau Password salah");
-                JOptionPane.showMessageDialog(null, "Username atau Password salah.", "Pemberitahuan", 0);
-//                Main.admin = true;
-//                
-//                Buku bukuFrame = new Buku();
-//                bukuFrame.show();
-//                dispose();
-            }
-        } catch (Exception e) {}
-    }//GEN-LAST:event_tbtbLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,10 +136,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JButton tbLogin;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbLoading;
+    private javax.swing.JProgressBar pbLoading;
     // End of variables declaration//GEN-END:variables
 }

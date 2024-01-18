@@ -14,6 +14,10 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -62,10 +66,33 @@ public class Pustakawan extends javax.swing.JFrame {
         lbId.setText(null);
         txtNama.setText(null);
         txtEmail.setText(null);
-        txtTelepon.setText(null);
+//        txtTelepon.setText(null);
+        txtTelepon.setText("");
         txtAlamat.setText(null);
         txtPassword.setText(null);
         cbAdmin.setSelectedIndex(0);
+    }
+    
+        static class NumberOnlyFilter extends DocumentFilter {
+        @Override
+        public void insertString(DocumentFilter.FilterBypass fb, int offset, String text, AttributeSet attr)
+                throws BadLocationException {
+            if (isNumeric(text)) {
+                super.insertString(fb, offset, text, attr);
+            }
+        }
+
+        @Override
+        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                throws BadLocationException {
+            if (isNumeric(text)) {
+                super.replace(fb, offset, length, text, attrs);
+            }
+        }
+
+        private boolean isNumeric(String str) {
+            return str.matches("\\d*");
+        }
     }
     
     public Pustakawan() {
@@ -76,6 +103,9 @@ public class Pustakawan extends javax.swing.JFrame {
         if (!Main.admin) {
             btMenuPustakawan.setVisible(false);
         }
+        tbPustakawan.setDefaultEditor(Object.class, null);
+        
+        ((AbstractDocument) txtTelepon.getDocument()).setDocumentFilter(new NumberOnlyFilter());
         
         setLocationRelativeTo(null);
     }
@@ -111,13 +141,13 @@ public class Pustakawan extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtTelepon = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtAlamat = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cbAdmin = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
         lbId = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAlamat = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -354,12 +384,6 @@ public class Pustakawan extends javax.swing.JFrame {
 
         jLabel5.setText("Alamat");
 
-        txtAlamat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAlamatActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Password");
 
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -372,9 +396,12 @@ public class Pustakawan extends javax.swing.JFrame {
 
         cbAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tidak", "Ya" }));
 
-        jLabel9.setText("ID =");
-
+        lbId.setForeground(new java.awt.Color(255, 255, 255));
         lbId.setText(" ");
+
+        txtAlamat.setColumns(20);
+        txtAlamat.setRows(5);
+        jScrollPane2.setViewportView(txtAlamat);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -383,25 +410,22 @@ public class Pustakawan extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassword)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                     .addComponent(txtNama)
                     .addComponent(txtEmail)
                     .addComponent(txtTelepon)
-                    .addComponent(txtAlamat)
-                    .addComponent(txtPassword)
+                    .addComponent(jScrollPane2)
                     .addComponent(cbAdmin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -423,7 +447,7 @@ public class Pustakawan extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -433,10 +457,8 @@ public class Pustakawan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lbId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(lbId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -545,7 +567,7 @@ public class Pustakawan extends javax.swing.JFrame {
 
     private void btTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTambahActionPerformed
         // TODO add your handling code here:
-        if (!Validation.validateEmail(txtEmail.getText()) || !Validation.validatePhone(txtTelepon.getText()) || !Validation.validatePassword(txtPassword.getText())) {
+        if (!Validation.validateEmail(txtEmail.getText()) || !Validation.validatePhone(txtTelepon.getText()) || !Validation.validatePassword(txtPassword.getText()) || !Validation.validateEmailExists(txtEmail.getText(), "pustakawan")) {
             return;
         } 
                 
@@ -587,9 +609,9 @@ public class Pustakawan extends javax.swing.JFrame {
             "', email = '" + txtEmail.getText() +
             "', telepon = '" + txtTelepon.getText() +
             "', alamat = '" + txtAlamat.getText() +
-            "', passwod = '" + txtPassword.getText() +
-            "', admin = '" + cbAdmin.getSelectedItem() +
-            "' WHERE id = '" + lbId.getText() + "'";
+            "', password = '" + txtPassword.getText() +
+            "', admin = " + cbAdmin.getSelectedIndex() +
+            " WHERE id = '" + lbId.getText() + "'";
             java.sql.Connection conn = (Connection)Config.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
@@ -632,10 +654,6 @@ public class Pustakawan extends javax.swing.JFrame {
     private void txtTeleponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTeleponActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTeleponActionPerformed
-
-    private void txtAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlamatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAlamatActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
@@ -699,15 +717,15 @@ public class Pustakawan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbId;
     private javax.swing.JTable tbPustakawan;
-    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtPassword;

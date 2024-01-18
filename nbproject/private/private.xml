@@ -12,12 +12,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Anggota.java</file>
-            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Login.java</file>
-            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Peminjaman.java</file>
+            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Pustakawan.java</file>
+            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/backend/Validation.java</file>
             <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/Main.java</file>
             <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Buku.java</file>
-            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Pustakawan.java</file>
+            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/backend/Config.java</file>
+            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/About.java</file>
+            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Anggota.java</file>
+            <file>file:/D:/School%20&amp;%20Educations/College/Third%20Term/Object%20Oriented%20Programming/Finals/ePustaka/src/com/epustaka/frontend/Peminjaman.java</file>
         </group>
     </open-files>
 </project-private>

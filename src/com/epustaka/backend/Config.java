@@ -7,6 +7,7 @@ package com.epustaka.backend;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Config {
             mysqlconfig = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
             System.err.print("Koneksi gagal" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Koneksi ke database gagal.", "Pemberitahuan", 0);
+
         }
         return mysqlconfig;
     }

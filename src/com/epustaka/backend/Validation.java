@@ -4,9 +4,13 @@
  */
 package com.epustaka.backend;
 
+import java.sql.Connection;
 import java.util.Date;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -30,6 +34,21 @@ public class Validation {
         return result;
     }
     
+    public static boolean validateEmailExists(String email, String table) {
+        try {
+            String sql = "select email from " + table + " where email = '" + email + "'";
+            java.sql.Connection conn = (Connection)Config.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            
+            if (res.next()) {
+                JOptionPane.showMessageDialog(null, "Email " + email+ " sudah digunakan, silahkan masukkan email yang baru.", "Pemberitahuan", 2);
+                return false;
+            }
+        } catch (Exception e) {}   
+        return true;
+    }
+    
     public static boolean validatePassword(String password) {
         String pattern = "^(?=\\S+$).{8,}$";
         boolean result = validateRegex(pattern, password);
@@ -46,11 +65,11 @@ public class Validation {
             return false;
         }
         
-        String pattern = "^[0-9]*.{11,14}$";
+        String pattern = "^[0-9]{11,14}$";
         boolean result = validateRegex(pattern, phone);
         
         if(!result) {
-            JOptionPane.showMessageDialog(null, "ISBN harus terdiri dari 10 s.d. 13 angka.", "Pemberitahuan", 2);
+            JOptionPane.showMessageDialog(null, "Hanya angka dibolehkan dalam Nomor Telepon \n Contoh: 6281234567890", "Pemberitahuan", 2);
         }
         return result;
     }
@@ -63,6 +82,21 @@ public class Validation {
             JOptionPane.showMessageDialog(null, "ISBN harus terdiri dari 10 s.d. 13 angka.", "Pemberitahuan", 2);
         }
         return result;
+    }
+    
+    public static boolean validateISBNExists(String isbn) {
+        try {
+            String sql = "select isbn from buku where isbn = '" + isbn + "'";
+            java.sql.Connection conn = (Connection)Config.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            
+            if (res.next()) {
+                JOptionPane.showMessageDialog(null, "ISBN " + isbn + " sudah digunakan, silahkan masukkan ISBN yang baru.", "Pemberitahuan", 2);
+                return false;
+            }
+        } catch (Exception e) {}
+        return true;
     }
     
     public static boolean validateGreaterDate(Date lesser, Date greater) {
@@ -85,10 +119,32 @@ public class Validation {
         
         boolean resultA = validateRegex(patternA, location);
         boolean resultB = validateRegex(patternB, location);
-        if(!resultA || !resultB) {
+        if(!resultA && !resultB) {
             JOptionPane.showMessageDialog(null, "Format lokasi harus mengikuti salah satu contoh di bawah: \n A-1 atau AA-01", "Pemberitahuan", 2);
             return false;
         }
         return true;
     }
+    
+//    static class NumberOnlyFilter extends DocumentFilter {
+//        @Override
+//        public void insertString(DocumentFilter.FilterBypass fb, int offset, String text, AttributeSet attr)
+//                throws BadLocationException {
+//            if (isNumeric(text)) {
+//                super.insertString(fb, offset, text, attr);
+//            }
+//        }
+//
+//        @Override
+//        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+//                throws BadLocationException {
+//            if (isNumeric(text)) {
+//                super.replace(fb, offset, length, text, attrs);
+//            }
+//        }
+//
+//        private boolean isNumeric(String str) {
+//            return str.matches("\\d*");
+//        }
+//    }
 }

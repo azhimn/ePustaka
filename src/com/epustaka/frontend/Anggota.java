@@ -14,6 +14,10 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -49,10 +53,32 @@ public class Anggota extends javax.swing.JFrame {
         } catch (Exception e) {}
     }
     
+    static class NumberOnlyFilter extends DocumentFilter {
+        @Override
+        public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr)
+                throws BadLocationException {
+            if (isNumeric(text)) {
+                super.insertString(fb, offset, text, attr);
+            }
+        }
+
+        @Override
+        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                throws BadLocationException {
+            if (isNumeric(text)) {
+                super.replace(fb, offset, length, text, attrs);
+            }
+        }
+
+        private boolean isNumeric(String str) {
+            return str.matches("\\d*");
+        }
+    }
+    
     private void bersihkan() {
         txtNama.setText(null);
         txtEmail.setText(null);
-        txtTelepon.setText(null);
+        txtTelepon.setText("");
         txtAlamat.setText(null);
         lbId.setText(null);
     }
@@ -65,6 +91,9 @@ public class Anggota extends javax.swing.JFrame {
         if (!Main.admin) {
             btMenuPustakawan.setVisible(false);
         }
+        
+        ((AbstractDocument) txtTelepon.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+        tbAnggota.setDefaultEditor(Object.class, null);
         
         setLocationRelativeTo(null);
     }
@@ -100,9 +129,9 @@ public class Anggota extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtTelepon = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtAlamat = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         lbId = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAlamat = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -344,15 +373,12 @@ public class Anggota extends javax.swing.JFrame {
 
         jLabel5.setText("Alamat");
 
-        txtAlamat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAlamatActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("ID =");
-
+        lbId.setForeground(new java.awt.Color(255, 255, 255));
         lbId.setText(" ");
+
+        txtAlamat.setColumns(20);
+        txtAlamat.setRows(5);
+        jScrollPane2.setViewportView(txtAlamat);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -365,17 +391,14 @@ public class Anggota extends javax.swing.JFrame {
                     .addComponent(txtNama)
                     .addComponent(txtEmail)
                     .addComponent(txtTelepon)
-                    .addComponent(txtAlamat)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -397,12 +420,10 @@ public class Anggota extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lbId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addComponent(lbId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -496,7 +517,7 @@ public class Anggota extends javax.swing.JFrame {
 
     private void btTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTambahActionPerformed
         // TODO add your handling code here:
-        if (!Validation.validateEmail(txtEmail.getText()) || !Validation.validatePhone(txtTelepon.getText())) {
+        if (!Validation.validateEmail(txtEmail.getText()) || !Validation.validatePhone(txtTelepon.getText()) || !Validation.validateEmailExists(txtEmail.getText(), "anggota")) {
             return;
         }        
         
@@ -580,10 +601,6 @@ public class Anggota extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTeleponActionPerformed
 
-    private void txtAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlamatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAlamatActionPerformed
-
     private void btMenuBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenuBukuActionPerformed
         // TODO add your handling code here:
         Buku bukuFrame = new Buku();
@@ -646,15 +663,15 @@ public class Anggota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbId;
     private javax.swing.JTable tbAnggota;
-    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtSearch;
